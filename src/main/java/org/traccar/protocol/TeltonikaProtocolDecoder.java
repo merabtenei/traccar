@@ -221,6 +221,7 @@ public class TeltonikaProtocolDecoder extends BaseProtocolDecoder {
         register(11, fmbXXX, (p, b) -> p.set(Position.KEY_ICCID, String.valueOf(b.readLong())));
         register(12, fmbXXX, (p, b) -> p.set(Position.KEY_FUEL_USED, b.readUnsignedInt() * 0.001));
         register(13, fmbXXX, (p, b) -> p.set(Position.KEY_FUEL_CONSUMPTION, b.readUnsignedShort() * 0.01));
+        register(15, fmbXXX, (p, b) -> p.set("ecoScore", b.readUnsignedShort() * 0.01));
         register(16, null, (p, b) -> p.set(Position.KEY_ODOMETER, b.readUnsignedInt()));
         register(17, null, (p, b) -> p.set("axisX", b.readShort()));
         register(18, null, (p, b) -> p.set("axisY", b.readShort()));
@@ -233,6 +234,10 @@ public class TeltonikaProtocolDecoder extends BaseProtocolDecoder {
         register(28, null, (p, b) -> p.set("bleTemp4", b.readShort() * 0.01));
         register(30, fmbXXX, (p, b) -> p.set("faultCount", b.readUnsignedByte()));
         register(32, fmbXXX, (p, b) -> p.set(Position.KEY_COOLANT_TEMP, b.readByte()));
+        register(36, fmbXXX, (p, b) -> p.set(Position.KEY_RPM, b.readUnsignedShort()));
+        register(37, fmbXXX, (p, b) -> p.set(Position.KEY_OBD_SPEED, b.readUnsignedByte()));
+        register(41, fmbXXX, (p, b) -> p.set(Position.KEY_THROTTLE, b.readUnsignedByte()));
+        register(48, fmbXXX, (p, b) -> p.set("fuelLevelPercentage", b.readUnsignedByte()));
         register(66, null, (p, b) -> p.set(Position.KEY_POWER, b.readUnsignedShort() * 0.001));
         register(67, null, (p, b) -> p.set(Position.KEY_BATTERY, b.readUnsignedShort() * 0.001));
         register(68, fmbXXX, (p, b) -> p.set("batteryCurrent", b.readUnsignedShort() * 0.001));
